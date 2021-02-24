@@ -4,9 +4,9 @@ import { v4 as uuid } from 'uuid'
 export const initialUsers = [
     {
       id: uuid(),
-      name: 'Will',
-      email: 'william@email.com',
-      password: 'hunter2',
+      name:'Dave Grohl',
+      email:'freshcoffee@email.com',
+      password:'hunter2',
       tos: true
     },
   ]

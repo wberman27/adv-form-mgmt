@@ -11,7 +11,6 @@
   background-color: slategray;
   height: 100vh;
   color: coral;
-  text-shadow: 1px 1px 5px lightgray;
 }
 
 .App-logo {
@@ -40,17 +39,42 @@
   color: #61dafb;
 }
 .cardContainer{
-  justify-content: flex-start;
-  text-align: start;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  width:100%;
 }
 .userContainer{
   display:flex;
-  justify-content: flex-start;
+  justify-content: center;
   text-align: start;
+  width: 80%;
 }
-
+.user{
+  background-color: white;
+  color: crimson;
+  text-shadow: 1px 1px 5px gray;
+  border-radius: 20px;
+  padding: 2%;
+  margin:2%;
+}
+.user h3{
+  background-color: white;
+}
+.user p{
+  background-color: white;
+}
 button{
-  background-color: none;
+  background-color: lime;
+  color: black;
+  border-color: rgb(173, 172, 172);
+  border-radius: 5px;
+}
+:disabled{
+  background-color: slategray;
+  color: darkgray;
+  border-color: gray;
+  border-radius: 5px;
 }
 input{
   background-color: white;
@@ -63,6 +87,10 @@ input{
   justify-content: center;
   align-items: center;
   text-align: center;
+}
+
+.errors{
+  color:red;
 }
 
 @keyframes App-logo-spin {
