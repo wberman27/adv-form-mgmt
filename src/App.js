@@ -109,7 +109,7 @@ function App() {
                 
                 <h3>{user.name}</h3>
                 <p>Email: {user.email}</p>
-                <p>Password: {user.password} //Dev Note: DO NOT RENDER TO PAGE!</p> {/*this is a joke, ha ha*/}
+                <p>Password: {user.password} ////Dev Note: ⚠ DO NOT RENDER TO PAGE! ⚠</p> {/*this is a joke, ha ha*/}
               </div>
             </div>
           </div>
