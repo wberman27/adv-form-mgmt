@@ -1,18 +1,22 @@
 // This is for the fake API. Do not delete!
 import { v4 as uuid } from 'uuid'
 
-const initialUserList = [
-  {
-    id: uuid(), // uuid is a lib to generate random, unique ids
-  }
-]
+export const initialUsers = [
+    {
+      id: uuid(),
+      name: 'Will',
+      email: 'william@email.com',
+      password: 'hunter2',
+      tos: true
+    },
+  ]
 
 export default {
   get() {
-    return Promise.resolve({ status: 200, success: true, data: initialUserList })
+    return Promise.resolve({ status: 200, success: true, data: initialUsers })
   },
-  post(url, { name, email, password, tos }) {
-    const newUser = { id: uuid(), name, email, password, tos }
+  post(url, { name, email, password}) {
+    const newUser = { id: uuid(), name, email, password}
     return Promise.resolve({ status: 200, success: true, data: newUser })
   }
 }

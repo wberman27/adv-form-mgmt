@@ -2,9 +2,10 @@ import React, {useState, useEffect} from 'react'
 import './App.css';
 import Form from './Form';
 import Schema from './Schema'
-import axios from 'axios'
+import axios from './fake-api/myapi'
 import * as yup from 'yup'
-import { v4 as uuid } from 'uuid'
+import './fake-api/myapi'
+import {initialUsers} from './fake-api/myapi'
 
 const initialFormValues = {
   //text input
@@ -21,20 +22,12 @@ const initialFormErrors = {
   password: '',
   tos: false,
 }
-const initialUsers = [
-  {
-    id: uuid(),
-    name: 'Will',
-    email: 'william@email.com',
-    password: 'hunter2',
-    tos: true
-  },
-]
+
 const initialDisabled = false
 
 function App() {
 
-  const [users, setUsers] = useState(initialUsers)
+  const [users, setUsers] = useState([])
   const [formValues, setFormValues] = useState(initialFormValues)
   const [formErrors, setFormErrors] = useState(initialFormErrors)
   const [disabled, setDisabled] = useState(initialDisabled)
@@ -52,8 +45,7 @@ function App() {
   const postNewUser = newUser => {
     axios.post('http://myapi.com/api/Users', newUser)
       .then(res =>{
-        console.log(res)
-        // setUsers([res.data, ...users])
+        setUsers([res.data, ...users])
       })
       .catch(err =>{
         console.log(err)
@@ -83,7 +75,6 @@ function App() {
       name: formValues.name.trim(),
       email: formValues.email.trim(),
       password: formValues.password.trim(),
-      tos: formValues.tos
     }
     postNewUser(newUser)
   }
@@ -108,17 +99,20 @@ function App() {
       disabled={disabled}
       errors={formErrors}
       />
-
+         <h2>Current Users:</h2>
       {
         users.map(user =>{
-          return (
-            <div className = 'user'>
-            <div className='userContainer'>
-               <h2>{user.name}</h2>
-               <p>Email: {user.email}</p>
-               <p>Password: {user.password}</p>
+          return (   
+          <div className = 'cardContainer'>
+            <div className = 'userContainer'>
+              <div className='user'>
+                
+                <h3>{user.name}</h3>
+                <p>Email: {user.email}</p>
+                <p>Password: {user.password} //Dev Note: DO NOT RENDER TO PAGE!</p> {/*this is a joke, ha ha*/}
+              </div>
             </div>
-            </div>
+          </div>
           )
         })
       }

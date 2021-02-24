@@ -1,3 +1,7 @@
+*{
+  background-color: slategray;
+}
+
 .App {
   display:flex;
   justify-content: flex-start;
@@ -35,12 +39,30 @@
 .App-link {
   color: #61dafb;
 }
-
-.user {
-  width: 60%;
-  display: flex;
-  justify-content: center;
+.cardContainer{
+  justify-content: flex-start;
   text-align: start;
+}
+.userContainer{
+  display:flex;
+  justify-content: flex-start;
+  text-align: start;
+}
+
+button{
+  background-color: none;
+}
+input{
+  background-color: white;
+  margin-left: 2%;
+}
+.inputs{
+  display:flex;
+  width:100%;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 
 @keyframes App-logo-spin {

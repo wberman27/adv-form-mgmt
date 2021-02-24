@@ -22,8 +22,7 @@ function Form(props) {
   
     return (
       <form className='form container' onSubmit={onSubmit}>
-        <div className='form-group submit'>
-          <h2>Add User</h2>
+        <div className='submit'>
   
           <div className='errors'>
             <div>{errors.name}</div>
@@ -33,8 +32,8 @@ function Form(props) {
           </div>
         </div>
   
-        <div className='form-group inputs'>
-          <h4>Info</h4>
+        <div className='inputs'>
+          <h3>Add User</h3>
   
           <label>Name
             <input
@@ -66,7 +65,7 @@ function Form(props) {
 
         </div>
   
-        <div className='form-group checkboxes'>
+        <div className='checkboxes'>
   
           <label>Terms of Service
             <input 
