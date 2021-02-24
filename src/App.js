@@ -1,9 +1,10 @@
 import React, {useState, useEffect} from 'react'
-import logo from './logo.svg';
 import './App.css';
 import Form from './Form';
+import Schema from './Schema'
 import axios from 'axios'
 import * as yup from 'yup'
+import { v4 as uuid } from 'uuid'
 
 const initialFormValues = {
   //text input
@@ -20,7 +21,15 @@ const initialFormErrors = {
   password: '',
   tos: false,
 }
-const initialUsers = []
+const initialUsers = [
+  {
+    id: uuid(),
+    name: 'Will',
+    email: 'william@email.com',
+    password: 'hunter2',
+    tos: true
+  },
+]
 const initialDisabled = false
 
 function App() {
@@ -41,12 +50,10 @@ function App() {
   }
 
   const postNewUser = newUser => {
-    // 🔥 STEP 6- IMPLEMENT! ON SUCCESS ADD NEWLY CREATED User TO STATE
-    //    helper to [POST] `newUser` to `http://buddies.com/api/Users`
-    //    and regardless of success or failure, the form should reset
     axios.post('http://myapi.com/api/Users', newUser)
       .then(res =>{
-        setUsers([res.data, ...users])
+        console.log(res)
+        // setUsers([res.data, ...users])
       })
       .catch(err =>{
         console.log(err)
@@ -54,9 +61,46 @@ function App() {
       setFormValues(initialFormValues)
   }
 
+  const inputChange = (name, value) => {
+    yup.reach(Schema, name)
+      .validate(value)
+      .then(() =>{
+        setFormErrors({...formErrors, [name]: ''})
+      })
+      .catch(err =>{
+        setFormErrors({...formErrors, [name]: err.errors[0]})
+      })
+      
+
+    setFormValues({
+      ...formValues,
+      [name]: value
+    })
+  }
+
+  const formSubmit = () => {
+    const newUser = {
+      name: formValues.name.trim(),
+      email: formValues.email.trim(),
+      password: formValues.password.trim(),
+      tos: formValues.tos
+    }
+    postNewUser(newUser)
+  }
+
+  useEffect(() => {
+    getUsers()
+  }, [])
+
+  useEffect(() => {
+    Schema.isValid(formValues).then(valid => setDisabled(!valid))
+
+  }, [formValues])
+
   return (
     <div className="App">
-      Hi from App
+      <h1>User Management App</h1>
+
       <Form 
       values={formValues}
       submit={formSubmit}
@@ -64,6 +108,22 @@ function App() {
       disabled={disabled}
       errors={formErrors}
       />
+
+      {
+        users.map(user =>{
+          return (
+            <div className = 'user'>
+            <div className='userContainer'>
+               <h2>{user.name}</h2>
+               <p>Email: {user.email}</p>
+               <p>Password: {user.password}</p>
+            </div>
+            </div>
+          )
+        })
+      }
+
+
     </div>
   );
 }

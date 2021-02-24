@@ -25,8 +25,6 @@ function Form(props) {
         <div className='form-group submit'>
           <h2>Add User</h2>
   
-          <button disabled = {disabled}>submit</button>
-  
           <div className='errors'>
             <div>{errors.name}</div>
             <div>{errors.email}</div>
@@ -80,6 +78,9 @@ function Form(props) {
           </label>
   
         </div>
+
+        <button disabled = {disabled}>Submit</button>
+      
       </form>
     )
   }

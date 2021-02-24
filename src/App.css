@@ -1,6 +1,6 @@
 .App {
   display:flex;
-  justify-content: start;
+  justify-content: flex-start;
   align-items:center;
   text-align: center;
   flex-flow: column;
@@ -34,6 +34,13 @@
 
 .App-link {
   color: #61dafb;
+}
+
+.user {
+  width: 60%;
+  display: flex;
+  justify-content: center;
+  text-align: start;
 }
 
 @keyframes App-logo-spin {
