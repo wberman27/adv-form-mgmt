@@ -1,5 +1,13 @@
 .App {
+  display:flex;
+  justify-content: start;
+  align-items:center;
   text-align: center;
+  flex-flow: column;
+  background-color: slategray;
+  height: 100vh;
+  color: coral;
+  text-shadow: 1px 1px 5px lightgray;
 }
 
 .App-logo {
