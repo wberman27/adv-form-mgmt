@@ -1,7 +1,7 @@
 import React from 'react'
 
 function Form(props) {
-    const {
+    const { //props from App
       values,
       submit,
       change,
@@ -9,14 +9,14 @@ function Form(props) {
       errors,
     } = props
   
-    const onSubmit = evt => {
+    const onSubmit = evt => { //prevent refresh default, invoke submit function
       evt.preventDefault()
       submit()
     }
   
-    const onChange = evt => {
+    const onChange = evt => { 
       const { name, value, type, checked } = evt.target
-      const valueToUse = type === 'checkbox' ? checked : value
+      const valueToUse = type === 'checkbox' ? checked : value //if type checkbox, use valuetouse, otherwise use value
       change(name, valueToUse)
     }
   

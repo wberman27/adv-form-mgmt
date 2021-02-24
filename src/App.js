@@ -5,18 +5,16 @@ import Schema from './Schema'
 import axios from './fake-api/myapi'
 import * as yup from 'yup'
 import './fake-api/myapi'
-import {initialUsers} from './fake-api/myapi'
+import { v4 as uuid } from 'uuid'
 
-const initialFormValues = {
-  //text input
+const initialFormValues = { //starting form values
   name: '',
   email: '',
   password: '',
-  //checkbox
-  tos: false,
+  tos: false, //a checkbox
 }
 
-const initialFormErrors = {
+const initialFormErrors = { //starting error values
   name: '',
   email: '',
   password: '',
@@ -27,11 +25,13 @@ const initialDisabled = false
 
 function App() {
 
+  //setting states for users, forms, error, and button availability
   const [users, setUsers] = useState([])
   const [formValues, setFormValues] = useState(initialFormValues)
   const [formErrors, setFormErrors] = useState(initialFormErrors)
   const [disabled, setDisabled] = useState(initialDisabled)
 
+  //get users from api, set users to the data in api
   const getUsers = () => {
     axios.get('http://myapi.com/api/Users')
       .then(res =>{
@@ -41,7 +41,7 @@ function App() {
         console.log(err)
       })
   }
-
+  //give new user to api, set users to new array of users
   const postNewUser = newUser => {
     axios.post('http://myapi.com/api/Users', newUser)
       .then(res =>{
@@ -50,9 +50,9 @@ function App() {
       .catch(err =>{
         console.log(err)
       })
-      setFormValues(initialFormValues)
+      setFormValues(initialFormValues) //reset forms
   }
-
+  //on input change check schema for errors, set form errors to array new errors
   const inputChange = (name, value) => {
     yup.reach(Schema, name)
       .validate(value)
@@ -63,30 +63,30 @@ function App() {
         setFormErrors({...formErrors, [name]: err.errors[0]})
       })
       
-
+  //on input change set form values to those values
     setFormValues({
       ...formValues,
       [name]: value
     })
   }
-
+  //on submit make new user from each form values, name, email, password respectively
   const formSubmit = () => {
     const newUser = {
       name: formValues.name.trim(),
       email: formValues.email.trim(),
       password: formValues.password.trim(),
     }
-    postNewUser(newUser)
+    postNewUser(newUser) //post to api
   }
 
-  useEffect(() => {
+  useEffect(() => { //get users invoked
     getUsers()
   }, [])
 
   useEffect(() => {
     Schema.isValid(formValues).then(valid => setDisabled(!valid))
 
-  }, [formValues])
+  }, [formValues]) //if schema is valid, then invoke setdisabled with opposite of valid, each time formValues state changes
 
   return (
     <div className="App">
@@ -99,11 +99,11 @@ function App() {
       disabled={disabled}
       errors={formErrors}
       />
-         <h2>Current Users:</h2>
-      {
+      <h2>Current Users:</h2>
+      { 
         users.map(user =>{
           return (   
-          <div className = 'cardContainer'>
+          <div className = 'cardContainer' key = {uuid}>
             <div className = 'userContainer'>
               <div className='user'>
                 

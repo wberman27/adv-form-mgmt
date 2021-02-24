@@ -1,7 +1,6 @@
-// This is for the fake API. Do not delete!
-import { v4 as uuid } from 'uuid'
+import { v4 as uuid } from 'uuid' //uuid gives us unique key ids
 
-export const initialUsers = [
+export const initialUsers = [ //this user will be on the page at start
     {
       id: uuid(),
       name:'Dave Grohl',
