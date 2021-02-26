@@ -15,19 +15,19 @@ const formValid = () => cy.get('div[class=errors]')
 
 it('Filling out inputs', () =>{
     textInput()
-    .type('William')
-    .should('have.value', 'William')
+        .type('William')
+        .should('have.value', 'William')
 
     emailInput()
-    .type('will@email.com')
-    .should('have.value', 'will@email.com')
+        .type('will@email.com')
+        .should('have.value', 'will@email.com')
 
     passInput()
-    .type('1234')
-    .should('have.value', '1234')
+        .type('1234')
+        .should('have.value', '1234')
 
     formValid() 
-    .children().should('have.text', 'Password must be at least 6 characters.')
+        .children().should('have.text', 'Password must be at least 6 characters.')
     //checks if page contains this error, it SHOULD
     //children of div class "errors" will be on DOM (and not empty) if there is an error
 
@@ -58,5 +58,5 @@ it('Checks input form validation', () =>{
 
 it('Checks for form validation to be empty, no errors.', () => {
     formValid()
-    .children().should('have.text', '') //Error children should have empty txt
+        .children().should('have.text', '') //Error children should have empty txt
 })
