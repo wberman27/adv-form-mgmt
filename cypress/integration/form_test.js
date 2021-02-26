@@ -46,10 +46,17 @@ it('Can submit', () =>{
     passInput().type('mypassword1234')
     tosCheckbox().check()
     submitButton().click()
-    cy.contains('Billy')
+    cy.contains('Billy') //the form submission should work and add 'Billy' to users
 })
 
-it('Checks for form validation', () => {
+it('Checks input form validation', () =>{
+    textInput()
+        .type('William{selectall}{backspace}') //type in a name then delete it for error
+    formValid()
+        .children().should('have.text', 'Name is required.') // this error should be on page
+})
+
+it('Checks for form validation to be empty, no errors.', () => {
     formValid()
     .children().should('have.text', '') //Error children should have empty txt
 })
