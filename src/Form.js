@@ -78,7 +78,7 @@ function Form(props) {
   
         </div>
 
-        <button disabled = {disabled}>Submit</button>
+        <button id = 'submit' disabled = {disabled}>Submit</button>
       
       </form>
     )
